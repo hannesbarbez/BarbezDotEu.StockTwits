@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Newtonsoft.Json;
 
 namespace BarbezDotEu.StockTwits.DTO
@@ -10,7 +11,7 @@ namespace BarbezDotEu.StockTwits.DTO
     public class Twit
     {
         [JsonProperty("id")]
-        public long Id { get; set; }
+        public string Id { get; set; }
 
         [JsonProperty("body")]
         public string Body { get; set; }
@@ -26,5 +27,11 @@ namespace BarbezDotEu.StockTwits.DTO
 
         [JsonProperty("symbols")]
         public List<Security> Symbols { get; set; }
+
+        public string GetCashTagsAsCsv()
+        {
+            // TODO: Low priority, but we could complete missing company name data in the securities table using: x.Title
+            return string.Join(",", this.Symbols.Select(x => x.Symbol));            
+        }
     }
 }

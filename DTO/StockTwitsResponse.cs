@@ -7,7 +7,7 @@ using BarbezDotEu.Provider.Interfaces;
 
 namespace BarbezDotEu.StockTwits.DTO
 {
-    public class StockTwitsResponse : IHasHttpResponseMessage
+    public class StockTwitsResponse : ICanFail
     {
         public ResponseStatus Response { get; set; }
 
@@ -18,6 +18,9 @@ namespace BarbezDotEu.StockTwits.DTO
         public List<Twit> Messages { get; set; }
 
         /// <inheritdoc/>
-        public HttpResponseMessage HttpResponseMessage { get; set; }
+        public HttpResponseMessage FailedResponse { get; set; }
+
+        /// <inheritdoc/>
+        public bool HasFailed => FailedResponse != null;
     }
 }

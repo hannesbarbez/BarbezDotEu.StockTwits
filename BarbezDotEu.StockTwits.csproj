@@ -10,6 +10,10 @@
     <RepositoryUrl>https://github.com/hannesbarbez/BarbezDotEu.StockTwits</RepositoryUrl>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BarbezDotEu.MicroBlog\BarbezDotEu.MicroBlog\BarbezDotEu.MicroBlog.csproj" />
+    <ProjectReference Include="..\BarbezDotEu.Provider\BarbezDotEu.Provider\BarbezDotEu.Provider\BarbezDotEu.Provider.csproj" />
   </ItemGroup>
 </Project>

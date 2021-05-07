@@ -41,6 +41,13 @@ namespace BarbezDotEu.StockTwits
             var request = new HttpRequestMessage(HttpMethod.Get, queryUrl);
             request.Headers.Accept.Add(acceptHeader);
             var result = await this.Request<StockTwitsResponse>(request);
+
+            if (result.HasFailed)
+            {
+                this.logger.LogWarning("Failed request resulted in the following response: {0}", result.FailedResponse);
+                return new List<MicroBlogEntry>();
+            }
+
             if (result?.Messages == null || !result.Messages.Any())
                 return new List<MicroBlogEntry>();
 

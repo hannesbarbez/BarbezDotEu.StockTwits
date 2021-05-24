@@ -43,14 +43,14 @@ namespace BarbezDotEu.StockTwits
 
             if (result.HasFailed)
             {
-                this.logger.LogWarning("Failed request resulted in the following response: {0}", result.FailedResponse);
+                this.logger.LogWarning("Failed request resulted in the following response: {0}", result.HttpResponseMessage);
                 return new List<MicroBlogEntry>();
             }
 
-            if (result?.Messages == null || !result.Messages.Any())
+            if (result.Content?.Messages == null || !result.Content.Messages.Any())
                 return new List<MicroBlogEntry>();
 
-            return TwitsAsMicroBlogEntries(result.Messages);
+            return TwitsAsMicroBlogEntries(result.Content.Messages);
         }
 
         /// <summary>

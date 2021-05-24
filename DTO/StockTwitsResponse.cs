@@ -2,12 +2,10 @@
 // Licensed under the GNU General Public License v3.0
 
 using System.Collections.Generic;
-using System.Net.Http;
-using BarbezDotEu.Provider.Interfaces;
 
 namespace BarbezDotEu.StockTwits.DTO
 {
-    public class StockTwitsResponse : ICanFail
+    public class StockTwitsResponse
     {
         public ResponseStatus Response { get; set; }
 
@@ -16,11 +14,5 @@ namespace BarbezDotEu.StockTwits.DTO
         public Cursor Cursor { get; set; }
 
         public List<Twit> Messages { get; set; }
-
-        /// <inheritdoc/>
-        public HttpResponseMessage FailedResponse { get; set; }
-
-        /// <inheritdoc/>
-        public bool HasFailed => FailedResponse != null;
     }
 }

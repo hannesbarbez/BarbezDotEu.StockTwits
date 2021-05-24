@@ -14,7 +14,6 @@ using BarbezDotEu.Provider;
 using BarbezDotEu.StockTwits.DTO;
 using BarbezDotEu.StockTwits.Interfaces;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
 namespace BarbezDotEu.StockTwits
@@ -25,7 +24,7 @@ namespace BarbezDotEu.StockTwits
         private readonly string searchRecentTweetsUrl;
         private readonly string searchRecentTweetsFields;
 
-        public StockTwitsDataProvider(ILogger<IHostedService> logger, IConfiguration configuration, IHttpClientFactory httpClientFactory)
+        public StockTwitsDataProvider(ILogger logger, IConfiguration configuration, IHttpClientFactory httpClientFactory)
             : base(logger, httpClientFactory)
         {
             this.acceptHeader = new MediaTypeWithQualityHeaderValue(MediaTypeNames.Application.Json);

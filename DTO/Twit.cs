@@ -4,28 +4,28 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 
 namespace BarbezDotEu.StockTwits.DTO
 {
     public class Twit
     {
-        [JsonProperty("id")]
+        [JsonPropertyName("id")]
         public string Id { get; set; }
 
-        [JsonProperty("body")]
+        [JsonPropertyName("body")]
         public string Body { get; set; }
 
-        [JsonProperty("created_at")]
+        [JsonPropertyName("created_at")]
         public DateTime CreatedAt { get; set; }
 
-        [JsonProperty("user")]
+        [JsonPropertyName("user")]
         public User User { get; set; }
 
-        [JsonProperty("source")]
+        [JsonPropertyName("source")]
         public Source Source { get; set; }
 
-        [JsonProperty("symbols")]
+        [JsonPropertyName("symbols")]
         public List<Security> Symbols { get; set; }
 
         public string GetCashTagsAsCsv()

@@ -2,31 +2,31 @@
 // Licensed under the GNU General Public License v3.0
 
 using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 
 namespace BarbezDotEu.StockTwits.DTO
 {
     public class User
     {
-        [JsonProperty("id")]
+        [JsonPropertyName("id")]
         public string Id { get; set; }
 
-        [JsonProperty("username")]
+        [JsonPropertyName("username")]
         public string Username { get; set; }
 
-        [JsonProperty("name")]
+        [JsonPropertyName("name")]
         public string Name { get; set; }
 
-        [JsonProperty("avatar_url")]
+        [JsonPropertyName("avatar_url")]
         public string AvatarUrl { get; set; }
 
-        [JsonProperty("avatar_url_ssl")]
+        [JsonPropertyName("avatar_url_ssl")]
         public string AvatarUrlSsl { get; set; }
 
-        [JsonProperty("identity")]
+        [JsonPropertyName("identity")]
         public string Identity { get; set; }
 
-        [JsonProperty("classification")]
+        [JsonPropertyName("classification")]
         public List<string> Classification { get; set; }
     }
 }

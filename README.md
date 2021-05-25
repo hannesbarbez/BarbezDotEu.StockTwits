@@ -1,2 +1,2 @@
 # BarbezDotEu.StockTwits
-A fast and efficient StockTwits client.
+A modern, work-in-progress StockTwits client.

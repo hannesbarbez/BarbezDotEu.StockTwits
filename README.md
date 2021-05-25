@@ -1,2 +1,2 @@
 # BarbezDotEu.StockTwits
-A modern, work-in-progress StockTwits client.
+An unofficial, modern, very much work-in-progress client for StockTwits APIs.

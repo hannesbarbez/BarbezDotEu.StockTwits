@@ -8,7 +8,7 @@
     <PackageId>BarbezDotEu.StockTwits</PackageId>
     <Copyright>©2021 Hannes Barbez</Copyright>
     <Version>1.0.0</Version>
-    <Description>A modern, very much work-in-progress client for StockTwits APIs.</Description>
+    <Description>An unofficial, modern, very much work-in-progress client for StockTwits APIs.</Description>
     <PackageTags>basic;polite;StockTwits;integration;third-party integration;provider;barbez</PackageTags>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
@@ -18,8 +18,15 @@
     <RepositoryType>GIT</RepositoryType>
     <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DocumentationFile>C:\Users\hanne\source\repos\BarbezDotEu.StockTwits\BarbezDotEu.StockTwits.xml</DocumentationFile>
+  </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="BarbezDotEu.MicroBlog" Version="1.0.0" />
     <PackageReference Include="BarbezDotEu.Provider" Version="2.0.0" />
+    <PackageReference Include="Vsxmd" Version="1.4.5">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
   </ItemGroup>
 </Project>

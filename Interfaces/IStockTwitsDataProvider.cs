@@ -11,6 +11,15 @@ namespace BarbezDotEu.StockTwits.Interfaces
     public interface IStockTwitsDataProvider : IPoliteProvider
     {
         /// <summary>
+        /// Configures this <see cref="IStockTwitsDataProvider"/> so that it can successfully communicate with the StockTwits APIs.
+        /// </summary>
+        /// <param name="stockTwitsConfiguration">The <see cref="StockTwitsConfiguration"/> to configure this <see cref="IStockTwitsDataProvider"/> with.</param>
+        /// <remarks>
+        /// Configuration is required before any APIs can be called.
+        /// </remarks>
+        void Configure(StockTwitsConfiguration stockTwitsConfiguration);
+
+        /// <summary>
         /// Queries for the last 30 twits containing a given symbol.
         /// </summary>
         /// <param name="symbol">The symbol for which to query.</param>

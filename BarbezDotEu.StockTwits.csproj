@@ -5,13 +5,21 @@
     <Company>Hannes Barbez</Company>
     <Title>BarbezDotEu.StockTwits</Title>
     <Product>BarbezDotEu.StockTwits</Product>
+    <PackageId>BarbezDotEu.StockTwits</PackageId>
     <Copyright>©2021 Hannes Barbez</Copyright>
     <Version>1.0.0</Version>
+    <Description>A modern, very much work-in-progress client for StockTwits APIs.</Description>
+    <PackageTags>basic;polite;StockTwits;integration;third-party integration;provider;barbez</PackageTags>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageProjectUrl>https://barbez.eu</PackageProjectUrl>
+    <PackageOutputPath>./nupkg</PackageOutputPath>
     <RepositoryUrl>https://github.com/hannesbarbez/BarbezDotEu.StockTwits</RepositoryUrl>
+    <RepositoryType>GIT</RepositoryType>
+    <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="BarbezDotEu.MicroBlog" Version="1.0.0" />
     <PackageReference Include="BarbezDotEu.Provider" Version="2.0.0" />
-    <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="5.0.0" />
   </ItemGroup>
 </Project>

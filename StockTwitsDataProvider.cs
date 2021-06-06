@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Hannes Barbez. All rights reserved.
 // Licensed under the GNU General Public License v3.0
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
@@ -13,30 +14,49 @@ using BarbezDotEu.MicroBlog.Enums;
 using BarbezDotEu.Provider;
 using BarbezDotEu.StockTwits.DTO;
 using BarbezDotEu.StockTwits.Interfaces;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 
 namespace BarbezDotEu.StockTwits
 {
     public class StockTwitsDataProvider : PoliteProvider, IStockTwitsDataProvider
     {
+        private StockTwitsConfiguration configuration;
         private readonly MediaTypeWithQualityHeaderValue acceptHeader;
-        private readonly string searchRecentTweetsUrl;
-        private readonly string searchRecentTweetsFields;
 
-        public StockTwitsDataProvider(ILogger logger, IConfiguration configuration, IHttpClientFactory httpClientFactory)
+        /// <summary>
+        /// Gets the <see cref="StockTwitsConfiguration"/> this <see cref="StockTwitsConfiguration"/> uses to communicate to the APIs.
+        /// </summary>
+        private StockTwitsConfiguration Configuration
+        {
+            get
+            {
+                if (this.configuration == null)
+                {
+                    throw new ApplicationException(
+                        $"An {nameof(StockTwitsDataProvider)} cannot be used before it is configured. To fix, call the {nameof(StockTwitsDataProvider)}.{nameof(Configure)} method right after initialization.");
+                }
+
+                return this.configuration;
+            }
+        }
+
+        /// <inheritdoc/>
+        public void Configure(StockTwitsConfiguration configuration)
+        {
+            this.configuration = configuration;
+            this.SetRateLimitPerMinute(configuration.MaxCallsPerMinute);
+        }
+
+        public StockTwitsDataProvider(ILogger logger, IHttpClientFactory httpClientFactory)
             : base(logger, httpClientFactory)
         {
             this.acceptHeader = new MediaTypeWithQualityHeaderValue(MediaTypeNames.Application.Json);
-            this.SetRateLimitPerMinute(configuration["StockTwits:RateLimit:PerMinute"]);
-            this.searchRecentTweetsUrl = configuration["StockTwits:SearchRecentTweets:Url"];
-            this.searchRecentTweetsFields = configuration["StockTwits:SearchRecentTweets:TweetFields"];
         }
 
         /// <inheritdoc/>
         public async Task<List<MicroBlogEntry>> GetRecentTwits(string symbol)
         {
-            var queryUrl = $"{this.searchRecentTweetsUrl}{symbol.ToUpperInvariant()}{this.searchRecentTweetsFields}";
+            var queryUrl = $"{this.Configuration.SearchRecentTwitsUrl}{symbol.ToUpperInvariant()}{this.Configuration.SearchRecentTwitsFields}";
             var request = new HttpRequestMessage(HttpMethod.Get, queryUrl);
             request.Headers.Accept.Add(acceptHeader);
             var result = await this.Request<StockTwitsResponse>(request);

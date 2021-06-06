@@ -15,5 +15,11 @@ namespace BarbezDotEu.StockTwits.DTO
 
         [JsonPropertyName("title")]
         public string Title { get; set; }
+
+        [JsonPropertyName("watchlist_count")]
+        public long WatchlistCount { get; set; }
+
+        [JsonPropertyName("is_following")]
+        public bool IsFollowing { get; set; }
     }
 }

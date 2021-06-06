@@ -11,7 +11,7 @@ namespace BarbezDotEu.StockTwits.DTO
     public class Twit
     {
         [JsonPropertyName("id")]
-        public string Id { get; set; }
+        public long Id { get; set; }
 
         [JsonPropertyName("body")]
         public string Body { get; set; }
@@ -24,6 +24,9 @@ namespace BarbezDotEu.StockTwits.DTO
 
         [JsonPropertyName("source")]
         public Source Source { get; set; }
+
+        [JsonPropertyName("conversation")]
+        public Conversation Conversation { get; set; }
 
         [JsonPropertyName("symbols")]
         public List<Security> Symbols { get; set; }

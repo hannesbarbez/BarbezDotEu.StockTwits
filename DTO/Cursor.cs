@@ -8,12 +8,12 @@ namespace BarbezDotEu.StockTwits.DTO
     public class Cursor
     {
         [JsonPropertyName("more")]
-        public string More { get; set; }
+        public bool More { get; set; }
 
         [JsonPropertyName("since")]
-        public string Since { get; set; }
+        public long Since { get; set; }
 
         [JsonPropertyName("max")]
-        public string Max { get; set; }
+        public long Max { get; set; }
     }
 }

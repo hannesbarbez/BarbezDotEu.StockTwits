@@ -103,10 +103,10 @@ namespace BarbezDotEu.StockTwits
                     annotationalSmorgasbord = string.Join(",", annotations);
 
                 var flatTwit = new MicroBlogEntry(
-                    twit.User.Id,
+                    twit.User.Id.ToString(),
                     default,
                     twit.CreatedAt,
-                    twit.Id,
+                    twit.Id.ToString(),
                     default,
                     default,
                     default,

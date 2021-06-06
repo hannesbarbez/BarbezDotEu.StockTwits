@@ -9,7 +9,7 @@ namespace BarbezDotEu.StockTwits.DTO
     public class User
     {
         [JsonPropertyName("id")]
-        public string Id { get; set; }
+        public long Id { get; set; }
 
         [JsonPropertyName("username")]
         public string Username { get; set; }
@@ -25,6 +25,33 @@ namespace BarbezDotEu.StockTwits.DTO
 
         [JsonPropertyName("identity")]
         public string Identity { get; set; }
+
+        [JsonPropertyName("plus_tier")]
+        public string PlusTier { get; set; }
+
+        [JsonPropertyName("premium_room")]
+        public string PremiumRoom { get; set; }
+
+        [JsonPropertyName("official")]
+        public bool Official { get; set; }
+
+        [JsonPropertyName("trade_app")]
+        public bool TradeApp { get; set; }
+
+        [JsonPropertyName("followers")]
+        public long Followers { get; set; }
+
+        [JsonPropertyName("following")]
+        public long Following { get; set; }
+
+        [JsonPropertyName("ideas")]
+        public long Ideas { get; set; }
+
+        [JsonPropertyName("watchlist_stocks_count")]
+        public long WatchlistStocksCount { get; set; }
+
+        [JsonPropertyName("like_count")]
+        public long LikeCount { get; set; }
 
         [JsonPropertyName("classification")]
         public List<string> Classification { get; set; }

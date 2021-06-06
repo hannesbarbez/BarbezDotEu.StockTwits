@@ -8,7 +8,7 @@ namespace BarbezDotEu.StockTwits.DTO
     public class Source
     {
         [JsonPropertyName("id")]
-        public string Id { get; set; }
+        public long Id { get; set; }
 
         [JsonPropertyName("title")]
         public string Title { get; set; }

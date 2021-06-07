@@ -5,20 +5,38 @@ using System.Text.Json.Serialization;
 
 namespace BarbezDotEu.StockTwits.DTO
 {
+    /// <summary>
+    /// Implements a StockTwits security DTO.
+    /// </summary>
     public class Security
     {
+        /// <summary>
+        /// Gets or sets the id.
+        /// </summary>
         [JsonPropertyName("id")]
         public long Id { get; set; }
 
+        /// <summary>
+        /// Gets or sets the symbol.
+        /// </summary>
         [JsonPropertyName("symbol")]
         public string Symbol { get; set; }
 
+        /// <summary>
+        /// Gets or sets the title.
+        /// </summary>
         [JsonPropertyName("title")]
         public string Title { get; set; }
 
+        /// <summary>
+        /// Gets or sets the watchlist count.
+        /// </summary>
         [JsonPropertyName("watchlist_count")]
-        public long WatchlistCount { get; set; }
+        public long? WatchlistCount { get; set; }
 
+        /// <summary>
+        /// Gets or sets the is following value.
+        /// </summary>
         [JsonPropertyName("is_following")]
         public bool IsFollowing { get; set; }
     }

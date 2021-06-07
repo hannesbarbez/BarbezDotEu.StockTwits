@@ -18,6 +18,9 @@ using Microsoft.Extensions.Logging;
 
 namespace BarbezDotEu.StockTwits
 {
+    /// <summary>
+    /// Implements a data provider that connects to and can call StockTwits APIs.
+    /// </summary>
     public class StockTwitsDataProvider : PoliteProvider, IStockTwitsDataProvider
     {
         private StockTwitsConfiguration configuration;
@@ -47,6 +50,11 @@ namespace BarbezDotEu.StockTwits
             this.SetRateLimitPerMinute(configuration.MaxCallsPerMinute);
         }
 
+        /// <summary>
+        /// Constructs a new <see cref="StockTwitsDataProvider"/>.
+        /// </summary>
+        /// <param name="logger">A <see cref="ILogger"/> to use for logging.</param>
+        /// <param name="httpClientFactory">The <see cref="IHttpClientFactory"/> to use.</param>
         public StockTwitsDataProvider(ILogger logger, IHttpClientFactory httpClientFactory)
             : base(logger, httpClientFactory)
         {
@@ -54,16 +62,12 @@ namespace BarbezDotEu.StockTwits
         }
 
         /// <inheritdoc/>
-        public async Task<List<MicroBlogEntry>> GetRecentTwits(string symbol)
+        public async Task<List<MicroBlogEntry>> GetRecentTwits(string symbol, bool retryOnError = true, double waitingMinutesBeforeRetry = 15)
         {
-            var queryUrl = $"{this.Configuration.SearchRecentTwitsUrl}{symbol.ToUpperInvariant()}{this.Configuration.SearchRecentTwitsFields}";
-            var request = new HttpRequestMessage(HttpMethod.Get, queryUrl);
-            request.Headers.Accept.Add(acceptHeader);
-            var result = await this.Request<StockTwitsResponse>(request);
-
+            var result = await this.GetRecentTwitsResponse(symbol, retryOnError, waitingMinutesBeforeRetry);
             if (result.HasFailed)
             {
-                this.logger.LogWarning("Failed request resulted in the following response: {0}", result.HttpResponseMessage);
+                this.Logger.LogWarning("Failed request resulted in the following response: {0}", result.HttpResponseMessage);
                 return new List<MicroBlogEntry>();
             }
 
@@ -71,6 +75,15 @@ namespace BarbezDotEu.StockTwits
                 return new List<MicroBlogEntry>();
 
             return TwitsAsMicroBlogEntries(result.Content.Messages);
+        }
+
+        /// <inheritdoc/>
+        public async Task<PoliteReponse<StockTwitsResponse>> GetRecentTwitsResponse(string symbol, bool retryOnError = true, double waitingMinutesBeforeRetry = 15)
+        {
+            var queryUrl = $"{this.Configuration.SearchRecentTwitsUrl}{symbol.ToUpperInvariant()}{this.Configuration.SearchRecentTwitsFields}";
+            var request = new HttpRequestMessage(HttpMethod.Get, queryUrl);
+            request.Headers.Accept.Add(acceptHeader);
+            return await this.Request<StockTwitsResponse>(request, retryOnError, waitingMinutesBeforeRetry);
         }
 
         /// <summary>

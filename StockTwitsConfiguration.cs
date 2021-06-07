@@ -50,8 +50,6 @@ namespace BarbezDotEu.StockTwits
         /// <summary>
         /// Constructs a new <see cref="StockTwitsConfiguration"/> using given parameters and using some default settings.
         /// </summary>
-        /// <param name="consumerKey">The StockTwits consumer key for your application (which you must first obtain via the StockTwits.com developer website).</param>
-        /// <param name="consumerSecret">The StockTwits consumer secret for your application (which you must first obtain via the StockTwits.com developer website).</param>
         public StockTwitsConfiguration()
             : this(3.ToString(), "https://api.stocktwits.com/api/2/streams/symbol/", ".json")
         {

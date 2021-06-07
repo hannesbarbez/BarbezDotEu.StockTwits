@@ -11,9 +11,9 @@ namespace BarbezDotEu.StockTwits.DTO
         public bool More { get; set; }
 
         [JsonPropertyName("since")]
-        public long Since { get; set; }
+        public long? Since { get; set; }
 
         [JsonPropertyName("max")]
-        public long Max { get; set; }
+        public long? Max { get; set; }
     }
 }

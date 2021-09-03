@@ -83,7 +83,17 @@ namespace BarbezDotEu.StockTwits
             var queryUrl = $"{this.Configuration.SearchRecentTwitsUrl}{symbol.ToUpperInvariant()}{this.Configuration.SearchRecentTwitsFields}";
             var request = new HttpRequestMessage(HttpMethod.Get, queryUrl);
             request.Headers.Accept.Add(acceptHeader);
-            return await this.Request<StockTwitsResponse>(request, retryOnError, waitingMinutesBeforeRetry);
+            try
+            {
+                var result = await this.Request<StockTwitsResponse>(request, retryOnError, waitingMinutesBeforeRetry);
+                return result;
+            }
+            catch (JsonException e)
+            {
+                // TODO: Move try/catch to BarbezDotEu.Provider instead.
+                base.Logger.LogWarning($"An error occurred that we're going to ignore since occasionally, StockTwits sends back XML/HTML responses. Moving on from: {e}");
+                return null;
+            }
         }
 
         /// <summary>

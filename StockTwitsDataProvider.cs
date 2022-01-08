@@ -58,7 +58,7 @@ namespace BarbezDotEu.StockTwits
         public StockTwitsDataProvider(ILogger logger, IHttpClientFactory httpClientFactory)
             : base(logger, httpClientFactory)
         {
-            this.acceptHeader = new MediaTypeWithQualityHeaderValue(MediaTypeNames.Application.Json);
+            this.acceptHeader = new MediaTypeWithQualityHeaderValue("application/json");
         }
 
         /// <inheritdoc/>
@@ -114,7 +114,7 @@ namespace BarbezDotEu.StockTwits
                 var avatarUrlSsl = twit.User.AvatarUrlSsl;
                 var sourceUrl = twit.Source.Url;
 
-                HashSet<string> urls = new();
+                var urls = new HashSet<string>();
                 if (!string.IsNullOrWhiteSpace(avatarUrl))
                     urls.Add(avatarUrl);
                 if (!string.IsNullOrWhiteSpace(avatarUrlSsl))
@@ -135,7 +135,7 @@ namespace BarbezDotEu.StockTwits
                     ? string.Join(",", new HashSet<string>(twit.User.Classification))
                     : null;
 
-                HashSet<string> annotations = new();
+                var annotations = new HashSet<string>();
                 if (!string.IsNullOrWhiteSpace(username))
                     annotations.Add($"username: {username}");
                 if (!string.IsNullOrWhiteSpace(name))

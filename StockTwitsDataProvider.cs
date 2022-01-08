@@ -6,7 +6,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using System.Net.Mime;
 using System.Text.Json;
 using System.Threading.Tasks;
 using BarbezDotEu.MicroBlog.DTO;
@@ -23,42 +22,21 @@ namespace BarbezDotEu.StockTwits
     /// </summary>
     public class StockTwitsDataProvider : PoliteProvider, IStockTwitsDataProvider
     {
-        private StockTwitsConfiguration configuration;
+        private readonly StockTwitsConfiguration configuration;
         private readonly MediaTypeWithQualityHeaderValue acceptHeader;
-
-        /// <summary>
-        /// Gets the <see cref="StockTwitsConfiguration"/> this <see cref="StockTwitsConfiguration"/> uses to communicate to the APIs.
-        /// </summary>
-        private StockTwitsConfiguration Configuration
-        {
-            get
-            {
-                if (this.configuration == null)
-                {
-                    throw new ApplicationException(
-                        $"An {nameof(StockTwitsDataProvider)} cannot be used before it is configured. To fix, call the {nameof(StockTwitsDataProvider)}.{nameof(Configure)} method right after initialization.");
-                }
-
-                return this.configuration;
-            }
-        }
-
-        /// <inheritdoc/>
-        public void Configure(StockTwitsConfiguration configuration)
-        {
-            this.configuration = configuration;
-            this.SetRateLimitPerMinute(configuration.MaxCallsPerMinute);
-        }
 
         /// <summary>
         /// Constructs a new <see cref="StockTwitsDataProvider"/>.
         /// </summary>
         /// <param name="logger">A <see cref="ILogger"/> to use for logging.</param>
         /// <param name="httpClientFactory">The <see cref="IHttpClientFactory"/> to use.</param>
-        public StockTwitsDataProvider(ILogger logger, IHttpClientFactory httpClientFactory)
+        /// <param name="configuration">The <see cref="StockTwitsConfiguration"/> to configure this <see cref="IStockTwitsDataProvider"/> with.</param>
+        public StockTwitsDataProvider(ILogger logger, IHttpClientFactory httpClientFactory, StockTwitsConfiguration configuration)
             : base(logger, httpClientFactory)
         {
             this.acceptHeader = new MediaTypeWithQualityHeaderValue("application/json");
+            this.configuration = configuration;
+            this.SetRateLimitPerMinute(configuration.MaxCallsPerMinute);
         }
 
         /// <inheritdoc/>
@@ -80,7 +58,7 @@ namespace BarbezDotEu.StockTwits
         /// <inheritdoc/>
         public async Task<PoliteReponse<StockTwitsResponse>> GetRecentTwitsResponse(string symbol, bool retryOnError = true, double waitingMinutesBeforeRetry = 15)
         {
-            var queryUrl = $"{this.Configuration.SearchRecentTwitsUrl}{symbol.ToUpperInvariant()}{this.Configuration.SearchRecentTwitsFields}";
+            var queryUrl = $"{this.configuration.SearchRecentTwitsUrl}{symbol.ToUpperInvariant()}{this.configuration.SearchRecentTwitsFields}";
             var request = new HttpRequestMessage(HttpMethod.Get, queryUrl);
             request.Headers.Accept.Add(acceptHeader);
             return await this.Request<StockTwitsResponse>(request, retryOnError, waitingMinutesBeforeRetry);

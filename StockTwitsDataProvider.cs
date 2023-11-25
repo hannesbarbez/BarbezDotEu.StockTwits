@@ -44,7 +44,7 @@ namespace BarbezDotEu.StockTwits
             var result = await this.GetRecentTwitsResponse(symbol, retryOnError, waitingMinutesBeforeRetry);
             if (result.HasFailed)
             {
-                this.Logger.LogWarning("Failed request resulted in the following response: {0}", result.HttpResponseMessage);
+                this.Logger.LogInformation("Request resulted in the following response: {0}", result.HttpResponseMessage);
                 return new List<MicroBlogEntry>();
             }
 

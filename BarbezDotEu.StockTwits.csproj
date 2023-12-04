@@ -19,12 +19,13 @@
     <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <PackageReadmeFile>README.md</PackageReadmeFile>
-    <PackageIcon>64x64BarbezDotEu.png</PackageIcon>
+    <PackageIcon>ICON.png</PackageIcon>
+    <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
   <ItemGroup>
       <PackageReference Include="BarbezDotEu.MicroBlog" Version="2.0.0" />
       <PackageReference Include="BarbezDotEu.Provider" Version="8.0.2" />
-      <None Include="README.md" Pack="true" PackagePath="\"/>
-      <None Include="64x64BarbezDotEu.png" Pack="true" PackagePath="\"/>
+      <None Include="README.md" Pack="true" PackagePath="\" />
+      <None Include="ICON.png" Pack="true" PackagePath="\" />
   </ItemGroup>
 </Project>

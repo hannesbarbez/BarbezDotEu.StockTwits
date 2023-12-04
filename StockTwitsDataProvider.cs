@@ -44,12 +44,12 @@ namespace BarbezDotEu.StockTwits
             var result = await this.GetRecentTwitsResponse(symbol, retryOnError, waitingMinutesBeforeRetry);
             if (result.HasFailed)
             {
-                this.Logger.LogInformation("Request resulted in the following response: {0}", result.HttpResponseMessage);
-                return new List<MicroBlogEntry>();
+                this.Logger.LogInformation("Request resulted in the following response: {HttpResponseMessage}", result.HttpResponseMessage);
+                return [];
             }
 
-            if (result.Content?.Messages == null || !result.Content.Messages.Any())
-                return new List<MicroBlogEntry>();
+            if (result.Content?.Messages == null || result.Content.Messages.Count == 0)
+                return [];
 
             return TwitsAsMicroBlogEntries(result.Content.Messages);
         }
@@ -88,12 +88,12 @@ namespace BarbezDotEu.StockTwits
                 var username = twit.User.Username;
                 var name = twit.User.Name;
 
-                var hasCompanies = twit.Symbols != null && twit.Symbols.Any();
+                var hasCompanies = twit.Symbols != null && twit.Symbols.Count != 0;
                 var companies = hasCompanies
                     ? string.Join(",", twit.Symbols.Select(x => x.Title))
                     : null;
 
-                var hasClassifications = twit.User.Classification != null && twit.User.Classification.Any();
+                var hasClassifications = twit.User.Classification != null && twit.User.Classification.Count != 0;
                 var classifications = hasClassifications
                     ? string.Join(",", new HashSet<string>(twit.User.Classification))
                     : null;
@@ -109,7 +109,7 @@ namespace BarbezDotEu.StockTwits
                     annotations.Add($"user classifications: [{classifications}]");
 
                 string annotationalSmorgasbord = null;
-                if (annotations.Any())
+                if (annotations.Count != 0)
                     annotationalSmorgasbord = string.Join(",", annotations);
 
                 var flatTwit = new MicroBlogEntry(

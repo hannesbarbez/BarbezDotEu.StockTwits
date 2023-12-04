@@ -22,7 +22,7 @@ namespace BarbezDotEu.StockTwits.Interfaces
         /// <param name="retryOnError">Set to TRUE to retry the request, in case the initial request should prove unsuccessful.</param>
         /// <param name="waitingMinutesBeforeRetry">The number of minutes to wait before automatically retrying re-sending the request, if the intention is to retry again upon error.</param>
         /// <returns>A list of <see cref="MicroBlogEntry"/> items corresponding to the given symbol.</returns>
-        Task<List<MicroBlogEntry>> GetRecentTwits(string symbol, bool retryOnError = true, double waitingMinutesBeforeRetry = 15);
+        Task<IEnumerable<MicroBlogEntry>> GetRecentTwits(string symbol, bool retryOnError = true, double waitingMinutesBeforeRetry = 15);
 
         /// <summary>
         /// Queries for the last 30 twits containing a given symbol.
@@ -32,5 +32,11 @@ namespace BarbezDotEu.StockTwits.Interfaces
         /// <param name="waitingMinutesBeforeRetry">The number of minutes to wait before automatically retrying re-sending the request, if the intention is to retry again upon error.</param>
         /// <returns>A list of <see cref="MicroBlogEntry"/> items corresponding to the given symbol.</returns>
         Task<PoliteReponse<StockTwitsResponse>> GetRecentTwitsResponse(string symbol, bool retryOnError = true, double waitingMinutesBeforeRetry = 15);
+
+        /// <summary>
+        /// Returns a list of <see cref="Twit"/>s as collection of <see cref="MicroBlogEntry"/> items.
+        /// </summary>
+        /// <returns>A list of <see cref="Twit"/>s as collection of <see cref="MicroBlogEntry"/> items.</returns>
+        public IEnumerable<MicroBlogEntry> GetTwitsAsMicroBlogEntries(IEnumerable<Twit> twits);
     }
 }

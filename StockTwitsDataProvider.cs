@@ -39,7 +39,7 @@ namespace BarbezDotEu.StockTwits
         }
 
         /// <inheritdoc/>
-        public async Task<List<MicroBlogEntry>> GetRecentTwits(string symbol, bool retryOnError = true, double waitingMinutesBeforeRetry = 15)
+        public async Task<IEnumerable<MicroBlogEntry>> GetRecentTwits(string symbol, bool retryOnError = true, double waitingMinutesBeforeRetry = 15)
         {
             var result = await this.GetRecentTwitsResponse(symbol, retryOnError, waitingMinutesBeforeRetry);
             if (result.HasFailed)
@@ -51,7 +51,7 @@ namespace BarbezDotEu.StockTwits
             if (result.Content?.Messages == null || result.Content.Messages.Count == 0)
                 return [];
 
-            return TwitsAsMicroBlogEntries(result.Content.Messages);
+            return GetTwitsAsMicroBlogEntries(result.Content.Messages);
         }
 
         /// <inheritdoc/>
@@ -63,11 +63,8 @@ namespace BarbezDotEu.StockTwits
             return await this.Request<StockTwitsResponse>(request, retryOnError, waitingMinutesBeforeRetry);
         }
 
-        /// <summary>
-        /// Returns a list of <see cref="Twit"/>s as collection of <see cref="MicroBlogEntry"/> items.
-        /// </summary>
-        /// <returns>A list of <see cref="Twit"/>s as collection of <see cref="MicroBlogEntry"/> items.</returns>
-        private static List<MicroBlogEntry> TwitsAsMicroBlogEntries(List<Twit> twits)
+        /// <inheritdoc/>
+        public IEnumerable<MicroBlogEntry> GetTwitsAsMicroBlogEntries(IEnumerable<Twit> twits)
         {
             var results = new List<MicroBlogEntry>();
 

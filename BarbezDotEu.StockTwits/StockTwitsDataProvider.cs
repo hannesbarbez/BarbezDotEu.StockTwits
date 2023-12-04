@@ -11,6 +11,7 @@ using BarbezDotEu.MicroBlog.DTO;
 using BarbezDotEu.MicroBlog.Enums;
 using BarbezDotEu.Provider;
 using BarbezDotEu.StockTwits.DTO;
+using BarbezDotEu.StockTwits.EqualityComparers;
 using BarbezDotEu.StockTwits.Interfaces;
 using Microsoft.Extensions.Logging;
 
@@ -61,6 +62,12 @@ namespace BarbezDotEu.StockTwits
             var request = new HttpRequestMessage(HttpMethod.Get, queryUrl);
             request.Headers.Accept.Add(acceptHeader);
             return await this.Request<StockTwitsResponse>(request, retryOnError, waitingMinutesBeforeRetry);
+        }
+
+        /// <inheritdoc/>
+        public IEnumerable<Security> GetSecurities(IEnumerable<Twit> twits)
+        {
+            return twits?.SelectMany(x => x?.Symbols)?.ToHashSet<Security>(new IHasSymbolComparer());
         }
 
         /// <inheritdoc/>

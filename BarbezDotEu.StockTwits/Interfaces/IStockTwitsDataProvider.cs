@@ -37,6 +37,13 @@ namespace BarbezDotEu.StockTwits.Interfaces
         /// Returns a list of <see cref="Twit"/>s as collection of <see cref="MicroBlogEntry"/> items.
         /// </summary>
         /// <returns>A list of <see cref="Twit"/>s as collection of <see cref="MicroBlogEntry"/> items.</returns>
-        public IEnumerable<MicroBlogEntry> GetTwitsAsMicroBlogEntries(IEnumerable<Twit> twits);
+        IEnumerable<MicroBlogEntry> GetTwitsAsMicroBlogEntries(IEnumerable<Twit> twits);
+
+        /// <summary>
+        /// Returns a list of unique <see cref="Security"/> objects as found inside a given collection of <see cref="Twit"/>s.
+        /// </summary>
+        /// <param name="twits">The <see cref="Twit"/>s out of which to extract a list of unique <see cref="Security"/> objects.</param>
+        /// <returns>A list of unique <see cref="Security"/> objects as found inside a given collection of <see cref="Twit"/>s.</returns>
+        IEnumerable<Security> GetSecurities(IEnumerable<Twit> twits);
     }
 }

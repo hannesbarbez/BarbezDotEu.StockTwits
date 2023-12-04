@@ -2,13 +2,14 @@
 // Licensed under the GNU General Public License v3.0
 
 using System.Text.Json.Serialization;
+using BarbezDotEu.StockTwits.Interfaces;
 
 namespace BarbezDotEu.StockTwits.DTO
 {
     /// <summary>
     /// Implements a StockTwits security DTO.
     /// </summary>
-    public class Security
+    public class Security : IHasSymbol
     {
         /// <summary>
         /// Gets or sets the id.
@@ -16,9 +17,7 @@ namespace BarbezDotEu.StockTwits.DTO
         [JsonPropertyName("id")]
         public long Id { get; set; }
 
-        /// <summary>
-        /// Gets or sets the symbol.
-        /// </summary>
+        /// <inheritdoc/>
         [JsonPropertyName("symbol")]
         public string Symbol { get; set; }
 

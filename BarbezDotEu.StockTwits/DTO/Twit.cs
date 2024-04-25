@@ -61,7 +61,7 @@ namespace BarbezDotEu.StockTwits.DTO
         /// <returns></returns>
         public string GetCashTagsAsCsv()
         {
-            return string.Join(",", this.Symbols.Select(x => x.Symbol));            
+            return string.Join(",", this.Symbols.Select(x => x.Symbol));
         }
     }
 }

@@ -86,7 +86,7 @@ namespace BarbezDotEu.StockTwits
                     urls.Add(avatarUrl);
                 if (!string.IsNullOrWhiteSpace(avatarUrlSsl))
                     urls.Add(avatarUrlSsl);
-                if (!string.IsNullOrWhiteSpace(sourceUrl))
+                        if (!string.IsNullOrWhiteSpace(sourceUrl))
                     urls.Add(sourceUrl);
 
                 var username = twit.User.Username;

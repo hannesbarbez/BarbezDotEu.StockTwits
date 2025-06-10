@@ -31,8 +31,8 @@
         <Optimize>true</Optimize>
     </PropertyGroup>
   <ItemGroup>
-      <PackageReference Include="BarbezDotEu.MicroBlog" Version="2.0.0" />
-      <PackageReference Include="BarbezDotEu.Provider" Version="10.0.0" />
+      <PackageReference Include="BarbezDotEu.MicroBlog" Version="2.0.1" />
+      <PackageReference Include="BarbezDotEu.Provider" Version="10.0.1" />
       <None Include="..\README.md" Pack="true" PackagePath="\" />
       <None Include="..\ICON.png" Pack="true" PackagePath="\" />
   </ItemGroup>

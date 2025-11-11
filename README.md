@@ -16,18 +16,6 @@ Key points:
 
 Currently this library uses StockTwits' public, unauthenticated endpoints for reads such as symbol streams. The code constructs requests to the public stream URL (for example `https://api.stocktwits.com/api/2/streams/symbol/{SYMBOL}.json`) and does not add an API key, OAuth token, or username/password by default.
 
-What this means for you:
-
-- You do not need to provide an API key or login/password to use the library's current public-read features.
-- The library does not yet implement OAuth or authenticated endpoints (posting messages, user-specific feeds, follow/unfollow, etc.).
-
-If you need authenticated requests, there are two common approaches you can take:
-
-1. Add an Authorization header (Bearer token) to outgoing requests. For example, when you have an access token, set `request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", "<ACCESS_TOKEN>");` before sending the request.
-2. If the endpoint requires a `client_id`/`client_secret` query parameter instead of a bearer token, append it to the query URL.
-
-The codebase places request creation in `StockTwitsDataProvider`. To support authentication centrally, modify `GetRecentTwitsResponse` (or `Request<T>`) to attach credentials before sending.
-
 ## Quick start (example)
 
 Below is a minimal example showing typical usage with dependency injection.

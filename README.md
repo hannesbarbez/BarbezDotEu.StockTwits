@@ -43,7 +43,7 @@ If you instantiate `StockTwitsDataProvider` manually, provide an `IHttpClientFac
 
 Use `new StockTwitsConfiguration(maxCallsPerMinute)` to control rate limiting. The configuration also exposes the base stream URL and file extension used by the provider.
 
-## ## Notes & contributions
+## Notes & contributions
 
 - This project is a work in progress. If you need authenticated operations and want to contribute, open an issue or PR with the proposed API and implementation approach.
 - See the code in `BarbezDotEu.StockTwits` for current behavior around request construction and mapping.
